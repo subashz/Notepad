@@ -1,1 +1,1 @@
-# notepad-clone
+# Clone of notepad using qt framework
