@@ -1,5 +1,5 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef GUIWINDOW_H
+#define GUIWINDOW_H
 
 #include <QMainWindow>
 
@@ -47,4 +47,4 @@ private:
     QString main_file;
 };
 
-#endif // MAINWINDOW_H
+#endif // GUIWINDOW_H

@@ -1,5 +1,5 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "gui.h"
+#include "ui_gui.h"
 #include <QFontDialog>
 #include <QFileDialog>
 #include <QFile>
