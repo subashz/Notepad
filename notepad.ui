@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="notepad.qrc">
+    <normaloff>:/icons/mainIcon.png</normaloff>:/icons/mainIcon.png</iconset>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QPlainTextEdit" name="plainTextEdit">
     <property name="geometry">
@@ -94,6 +98,7 @@
    <addaction name="menuView"/>
    <addaction name="menuHelp"/>
   </widget>
+  <widget class="QStatusBar" name="statusBar"/>
   <action name="actionNew_Window">
    <property name="text">
     <string>New</string>
@@ -205,10 +210,16 @@
   </action>
   <action name="actionFont">
    <property name="text">
-    <string>Font</string>
+    <string>Font...</string>
    </property>
   </action>
   <action name="actionStatus_Bar">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Status Bar</string>
    </property>
@@ -238,6 +249,8 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="notepad.qrc"/>
+ </resources>
  <connections/>
 </ui>

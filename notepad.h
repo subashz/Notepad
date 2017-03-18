@@ -1,5 +1,7 @@
 #ifndef GUIWINDOW_H
 #define GUIWINDOW_H
+#include <QtCore>
+#include <QtWidgets>
 
 #include <QMainWindow>
 
@@ -42,9 +44,16 @@ private slots:
 
     void on_actionWord_Wrap_toggled(bool arg1);
 
+    void on_actionUndo_triggered();
+
+    void on_plainTextEdit_cursorPositionChanged();
+
+    void on_actionStatus_Bar_toggled(bool arg1);
+
 private:
     Ui::MainWindow *ui;
     QString main_file;
+    QLabel *LineNumber;
 };
 
 #endif // GUIWINDOW_H
