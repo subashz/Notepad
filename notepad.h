@@ -50,6 +50,10 @@ private slots:
 
     void on_actionStatus_Bar_toggled(bool arg1);
 
+    void on_actionGo_To_triggered();
+
+    void on_actionSelect_All_triggered();
+
 private:
     Ui::MainWindow *ui;
     QString main_file;

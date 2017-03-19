@@ -1,3 +1,4 @@
+#include "gotodialog.h"
 #include "notepad.h"
 #include "ui_notepad.h"
 #include <QFontDialog>
@@ -6,6 +7,7 @@
 #include <qDebug>
 #include <QTextStream>
 #include <QString>
+#include <QDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -13,20 +15,17 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setCentralWidget(ui->plainTextEdit);
-    // Default file value
-    main_file="";
 
     LineNumber = new QLabel(this);
-    LineNumber->setText("Ln 1, Col 1");
-
     ui->statusBar->addPermanentWidget(LineNumber);
 
-    // Text mode to no wrap by defaults
+    // defaults
     ui->plainTextEdit->setWordWrapMode(QTextOption::NoWrap);
     ui->plainTextEdit->setFont(QFont("Consolas",11));
-
-    // Set the window title
     QWidget::setWindowTitle("Untitled - Notepad");
+    LineNumber->setText("Ln 1, Col 1");
+    // Default file value
+    main_file="";
 }
 
 MainWindow::~MainWindow()
@@ -47,7 +46,6 @@ void MainWindow::on_actionOpen_triggered()
 
 void MainWindow::on_actionFont_triggered()
 {
-    //QFont font=QFontDialog::getFont(&ok,NULL);
     ui->plainTextEdit->setFont(QFontDialog::getFont(0,ui->plainTextEdit->font()));
 }
 
@@ -124,21 +122,28 @@ void MainWindow::on_actionCut_triggered()
 
 void MainWindow::on_actionDelete_triggered()
 {
+    QTextCursor curs=ui->plainTextEdit->textCursor();
+    if(curs.hasSelection())
+        qDebug() << "There is selection";
+    else
+        qDebug() << "There is no selection";
+    //curs.removeSelectedText();
+    //qDebug() <<"Anchor : " << curs.anchor();
+    //qDebug() <<"Position pos: "<< curs.position();
+    //qDebug() << "Selection star: "<<curs.selectionStart();
+    //qDebug() << "Select End: " << curs.selectionEnd();
+    ui->plainTextEdit->moveCursor(QTextCursor::Up);
 }
 
 void MainWindow::on_actionWord_Wrap_toggled(bool checked)
 {
    if(checked)
    {
-        ui->plainTextEdit->setWordWrapMode(QTextOption::WordWrap);
-        ui->plainTextEdit->lineWrapMode();
-        qDebug() <<"CHECKING : " <<checked;
+       ui->plainTextEdit->setWordWrapMode(QTextOption::WrapAtWordBoundaryOrAnywhere);
    }
    else
    {
         ui->plainTextEdit->setWordWrapMode(QTextOption::NoWrap);
-        ui->plainTextEdit->lineWrapMode();
-        qDebug() <<"CHECKING : " <<checked;
    }
 }
 
@@ -156,10 +161,22 @@ void MainWindow::on_plainTextEdit_cursorPositionChanged()
 
 }
 
-void MainWindow::on_actionStatus_Bar_toggled(bool arg1)
+void MainWindow::on_actionStatus_Bar_toggled(bool toogle)
 {
-    if(arg1)
+    if(toogle)
         ui->statusBar->show();
     else
        ui->statusBar->hide();
+}
+
+void MainWindow::on_actionGo_To_triggered()
+{
+   GotoDialog myDialog;
+   myDialog.setModal(true);
+   myDialog.exec();
+}
+
+void MainWindow::on_actionSelect_All_triggered()
+{
+   ui->plainTextEdit->selectAll();
 }
